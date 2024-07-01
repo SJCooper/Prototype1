@@ -14,11 +14,11 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
@@ -31,47 +31,53 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_SHIFT):
 		$AnimatedSprite2D.play("walk")
 		$AnimatedSprite2D.flip_h = false
+		SPEED = 200
 		speedAdjust = 2
 	#walk left animation logic
 	elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_SHIFT):
 		$AnimatedSprite2D.play("walk")
 		$AnimatedSprite2D.flip_h = true
+		SPEED = 200
 		speedAdjust = 2
 	#crouch walk right logic
 	elif Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_Z):
 		$AnimatedSprite2D.play("crouch_walk")
 		$AnimatedSprite2D.flip_h = false
+		SPEED = 200
 		speedAdjust = 4
 	#crouch walk left logic
 	elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_Z):
 		$AnimatedSprite2D.play("crouch_walk")
 		$AnimatedSprite2D.flip_h = true
+		SPEED = 200
 		speedAdjust = 4
-	##slide right logic
-	#elif Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_X):
-		#$AnimatedSprite2D.play("slide")
-		#$AnimatedSprite2D.flip_h = false
-		#speedAdjust = 1
-		#SPEED = SPEED - 2
-		#if SPEED < 0:
-			#SPEED = 0
-	##slide left logic
-	#elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_X):
-		#$AnimatedSprite2D.play("slide")
-		#$AnimatedSprite2D.flip_h = true
-		#speedAdjust = 1
-		#SPEED = SPEED - 2
-		#if SPEED < 0:
-			#SPEED = 0
+	#slide right logic
+	elif Input.is_action_pressed("ui_right") && Input.is_action_pressed("slide"):
+		$AnimatedSprite2D.play("slide")
+		$AnimatedSprite2D.flip_h = false
+		speedAdjust = 1
+		SPEED = SPEED - 3
+		if SPEED < 0:
+			SPEED = 0
+	#slide left logic
+	elif Input.is_action_pressed("ui_left") && Input.is_action_pressed("slide"):
+		$AnimatedSprite2D.play("slide")
+		$AnimatedSprite2D.flip_h = true
+		speedAdjust = 1
+		SPEED = SPEED - 3
+		if SPEED < 0:
+			SPEED = 0
 	#run right animation logic
 	elif Input.is_action_pressed("ui_right"):
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = false
+		SPEED = 200
 		speedAdjust = 1
 	#run left animation logic
 	elif Input.is_action_pressed("ui_left"):
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = true
+		SPEED = 200
 		speedAdjust = 1
 	#crouch idle
 	elif Input.is_key_pressed(KEY_Z):
