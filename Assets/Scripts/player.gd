@@ -26,18 +26,15 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	# flip H based on direction
-	if velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
-	else:
-		$AnimatedSprite2D.flip_h = false
-		
 	#play run animation when moving on X, Idle when stationary
-	if velocity.x != 0:
+	if Input.is_action_pressed("ui_right"):
 		$AnimatedSprite2D.play("run")
+		$AnimatedSprite2D.flip_h = false
+	elif Input.is_action_pressed("ui_left"):
+		$AnimatedSprite2D.play("run")
+		$AnimatedSprite2D.flip_h = true
 	else:
 		$AnimatedSprite2D.play("idle")
 		
-	
-	
+		
 	move_and_slide()
