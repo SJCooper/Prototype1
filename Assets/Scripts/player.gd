@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -350.0
+var speedAdjust = 1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -22,19 +23,32 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED / speedAdjust
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, (SPEED / speedAdjust))
 		
-	#play run animation when moving on X, Idle when stationary
-	if Input.is_action_pressed("ui_right"):
+	#walk right animation logic
+	if Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_SHIFT):
+		$AnimatedSprite2D.play("walk")
+		$AnimatedSprite2D.flip_h = false
+		speedAdjust = 2
+	#walk left animation logic
+	elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_SHIFT):
+		$AnimatedSprite2D.play("walk")
+		$AnimatedSprite2D.flip_h = true
+		speedAdjust = 2
+	#run right animation logic
+	elif Input.is_action_pressed("ui_right"):
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = false
+		speedAdjust = 1
+	#run left animation logic
 	elif Input.is_action_pressed("ui_left"):
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = true
+		speedAdjust = 1
+	#idle animation logic
 	else:
 		$AnimatedSprite2D.play("idle")
-		
 		
 	move_and_slide()
