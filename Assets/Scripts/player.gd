@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
+var SPEED = 200.0
 const JUMP_VELOCITY = -350.0
 var speedAdjust = 1
 
@@ -41,22 +41,28 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_Z):
 		$AnimatedSprite2D.play("crouch_walk")
 		$AnimatedSprite2D.flip_h = false
-		speedAdjust = 3
+		speedAdjust = 4
 	#crouch walk left logic
 	elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_Z):
 		$AnimatedSprite2D.play("crouch_walk")
 		$AnimatedSprite2D.flip_h = true
-		speedAdjust = 3
-	#slide  right logic
-	elif Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_X):
-		$AnimatedSprite2D.play("slide")
-		$AnimatedSprite2D.flip_h = false
-		speedAdjust = 1.5
-	#slide left logic
-	elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_X):
-		$AnimatedSprite2D.play("slide")
-		$AnimatedSprite2D.flip_h = true
-		speedAdjust = 1.5
+		speedAdjust = 4
+	##slide right logic
+	#elif Input.is_action_pressed("ui_right") && Input.is_key_pressed(KEY_X):
+		#$AnimatedSprite2D.play("slide")
+		#$AnimatedSprite2D.flip_h = false
+		#speedAdjust = 1
+		#SPEED = SPEED - 2
+		#if SPEED < 0:
+			#SPEED = 0
+	##slide left logic
+	#elif Input.is_action_pressed("ui_left") && Input.is_key_pressed(KEY_X):
+		#$AnimatedSprite2D.play("slide")
+		#$AnimatedSprite2D.flip_h = true
+		#speedAdjust = 1
+		#SPEED = SPEED - 2
+		#if SPEED < 0:
+			#SPEED = 0
 	#run right animation logic
 	elif Input.is_action_pressed("ui_right"):
 		$AnimatedSprite2D.play("run")
@@ -67,7 +73,7 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = true
 		speedAdjust = 1
-		
+	#crouch idle
 	elif Input.is_key_pressed(KEY_Z):
 		$AnimatedSprite2D.play("crouch_idle")
 	#idle animation logic
