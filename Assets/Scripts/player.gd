@@ -36,7 +36,7 @@ func _physics_process(delta):
 	if velocity.x != 0:
 		$AnimatedSprite2D.play("run")
 	else:
-		$AnimatedSprite2D.play("crouch_idle")
+		$AnimatedSprite2D.play("idle")
 		
 	
 	
