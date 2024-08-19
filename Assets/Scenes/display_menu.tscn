@@ -36,14 +36,14 @@ popup/item_1/id = 1
 popup/item_2/text = "1920 X 1080"
 popup/item_2/id = 2
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "BACK"
-
 [node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "FULLSCREEN"
 
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK"
+
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
