@@ -16,7 +16,7 @@ func _on_check_button_toggled(toggled_on):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://Assets/Scenes/options_menu.tscn")
+	get_tree().change_scene_to_file("res://Assets/Scenes/Menus/options_menu.tscn")
 	
 
 	
